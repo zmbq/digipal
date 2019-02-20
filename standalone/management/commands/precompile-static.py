@@ -14,7 +14,8 @@ class Command(BaseCommand):
         return os.path.dirname(settings.PROJECT_ROOT)
 
     def add_arguments(self, parser):
-        parser.add_argument('output_dir', type=str, help='Output Directory for Precompiled Files')
+        parser.add_argument('--output-dir', type=str, help='Output Directory for Precompiled Files',
+                            default=settings.PRECOMPILED_STATIC)
         parser.add_argument('--no-less', action='store_true', default=False,
                             help='Do not process less files')
         parser.add_argument('--no-typescript', action='store_true', default=False,
@@ -22,8 +23,8 @@ class Command(BaseCommand):
         parser.add_argument('--clear-output', action='store_true', default=False,
                             help='Clear output directory before proceeding')
         parser.add_argument('--project-dir', type=str, default=self.get_project_dir(), help='Project source dir')
-        parser.add_argument('--node-bin-dir', type=str, default='',
-                            help='Directory with Node binaries (use global path if empty)')
+        parser.add_argument('--node-bin-dir', type=str, default=os.path.join('standalone', 'node_modules', '.bin'),
+                            help='Directory with Node binaries')
 
     def handle(self, output_dir, no_less, no_typescript, clear_output, project_dir, node_bin_dir, *args, **options):
         if no_less and no_typescript:
