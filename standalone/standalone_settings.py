@@ -7,18 +7,18 @@ PROJECT_DIR = os.path.dirname(os.path.abspath(
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'digipal',
-    #     'USER': 'postgres',
-    #     'PASSWORD': 'postgres',
-    #     'HOST': '',
-    #     'PORT': '',
-    # },
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': os.path.join(PROJECT_DIR, 'sqlite3.db'),
-    }
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'digipal',
+        'USER': 'app_digipal',
+        'PASSWORD': 'dppsqlpass',
+        'HOST': 'localhost',
+        'PORT': '15432',
+    },
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+    #     'NAME': os.path.join(PROJECT_DIR, 'sqlite3.db'),
+    # }
 }
 
 DEBUG = True

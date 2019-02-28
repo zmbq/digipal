@@ -1,0 +1,16 @@
+# A docker-compose file for running the Archetype system on one computer.
+
+version: '3'
+
+services:
+  archetype-db:
+    image: kingsdigitallab/archetype-db
+    build: ./db
+    expose:
+      - "5432"
+    ports:
+      - "15432:5432"
+    volumes:
+      - archetype-db-volume:/var/lib/postgresql/data
+volumes:
+  archetype-db-volume:
