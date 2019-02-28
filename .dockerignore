@@ -1,5 +1,8 @@
 tmp
 logs
+env/
+*.pyc
+__pycache__/
 var/tmp
 **/*.tar
 **/.gz

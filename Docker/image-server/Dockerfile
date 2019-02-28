@@ -1,6 +1,11 @@
+# The iipserve Docker image.
 FROM ubuntu:18.04
+# We're basing this on Ubuntu since alpine wasn't able to compile iipserv (libtiff was not properly installed)
 
 # Install packages
+# This is split into specific commands as one huge apt-get install command did not complete properly (there were
+# consistent network errors)
+# We should regroups this into one command at some point, to create smaller images.
 RUN echo Updating && apt-get update
 RUN apt-get install -y git
 RUN apt-get install -y autoconf
@@ -29,5 +34,3 @@ ENV FILESYSTEM_PREVIX /image
 ENV LOGFILE /logs/iipsrv.log
 
 CMD ["/iipsrv/src/iipsrv.fcgi", "--bind", "127.0.0.1:9000", "--backlog", "1024"]
-
-

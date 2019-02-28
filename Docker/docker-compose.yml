@@ -22,6 +22,15 @@ services:
       - archetype-images:/image
       - archetype-logs:/logs
 
+  archetype-backend:
+    image: kingsdigitallab/archetype-backend
+    build: ./backend-server
+    expose:
+      - "8090"
+    volumes:
+      - archetype-images:/image
+      - archetype-logs:/logs
+
 volumes:
   archetype-db-volume:
 
