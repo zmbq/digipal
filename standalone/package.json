@@ -1,0 +1,15 @@
+{
+  "name": "node-utils",
+  "version": "0.0.0",
+  "description": "Node Utilities for the Deployment of DigiPal",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "less": "^3.9.0",
+    "typescript": "^3.3.3"
+  }
+}
