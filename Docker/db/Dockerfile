@@ -1,4 +1,4 @@
-FROM postgres:9.6
+FROM postgres:9.6-alpine
 
 ENV POSTGRES_DB digipal
 ENV POSTGRES_USER app_digipal

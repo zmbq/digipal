@@ -12,5 +12,21 @@ services:
       - "15432:5432"
     volumes:
       - archetype-db-volume:/var/lib/postgresql/data
+
+  archetype-image-server:
+    image: kingsdigitallab/archetype-image-server
+    build: ./image-server
+    expose:
+      - "9000"
+    volumes:
+      - archetype-images:/image
+      - archetype-logs:/logs
+
 volumes:
   archetype-db-volume:
+
+  archetype-images:
+
+  archetype-logs:
+
+
