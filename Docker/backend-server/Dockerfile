@@ -13,8 +13,6 @@ RUN apk update && apk add \
 
 # Clone the sources
 RUN git clone -b develop https://github.com/kcl-ddh/digipal.git /digipal
-COPY settings_docker.py /digipal/digipal_project/local_settings.py
-COPY wsgi.ini /digipal/wsgi.ini
 
 # Install Python requirements
 RUN pip install -r /digipal/build/requirements.txt
@@ -22,4 +20,9 @@ RUN pip install -r /digipal/build/requirements.txt
 # Install node requirements
 RUN npm install -g less typescript@2.1.5
 
-CMD ['/usr/sbin/uwsgi', '--ini', '/digipal/wsgi.ini']
+# Copy parameter files
+COPY settings_docker.py /digipal/digipal_project/local_settings.py
+COPY wsgi.ini /digipal/wsgi.ini
+COPY start.sh /digipal/build/start.sh
+
+CMD ["/bin/sh", "/digipal/build/start.sh"]

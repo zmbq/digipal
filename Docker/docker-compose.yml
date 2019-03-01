@@ -27,8 +27,25 @@ services:
     build: ./backend-server
     expose:
       - "8090"
+    depends_on:
+      - "archetype-db"
     volumes:
+      - archetype-django:/django
       - archetype-images:/image
+      - archetype-logs:/logs
+
+  archetype-webserver:
+    image: kingsdigitallab/archetype-webserver
+    build: ./webserver
+    expose:
+      - "80"
+    ports:
+      - "6080:80"
+    depends_on:
+      - "archetype-backend"
+      - "archetype-image-server"
+    volumes:
+      - archetype-django:/django
       - archetype-logs:/logs
 
 volumes:
@@ -38,4 +55,5 @@ volumes:
 
   archetype-logs:
 
+  archetype-django:
 
