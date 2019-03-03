@@ -29,8 +29,7 @@ COPY digipal_text /digipal/digipal_text
 COPY manage.py /digipal/manage.py
 
 # Copy parameter files
-COPY Docker/backend-server/settings_docker.py /digipal/digipal_project/local_settings.py
-# COPY Docker/backend-server/wsgi.ini /digipal/wsgi.ini
+COPY Docker/backend-server/settings_docker.py /digipal/digipal/settings_docker.py
 COPY Docker/backend-server/start.sh /digipal/build/start.sh
 
 ENV DJANGO_SETTINGS_MODULE digipal_project.settings

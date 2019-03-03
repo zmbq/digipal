@@ -105,6 +105,9 @@ LOGOUT_URL = PROJECT_URL + 'account/logout/'
 # Full filesystem path to the project.
 PROJECT_ROOT = os.path.dirname(os.path.abspath(
     sys.modules[os.environ['DJANGO_SETTINGS_MODULE']].__file__))
+
+PROJECT_DATA_ROOT = os.environ.get('DATA_ROOT', PROJECT_ROOT)
+
 # sys.path.append(os.path.join(PROJECT_ROOT, 'apps'))
 
 # Name of the directory for the project.
@@ -123,7 +126,8 @@ STATIC_URL = '/static/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' 'static/' subdirectories and in STATICFILES_DIRS.
 # Example: '/home/media/media.lawrence.com/static/'
-STATIC_ROOT = os.path.join(PROJECT_ROOT, STATIC_URL.strip('/'))
+STATIC_ROOT = os.path.join(PROJECT_DATA_ROOT, STATIC_URL.strip('/'))
+make_path(STATIC_ROOT)
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -132,25 +136,25 @@ MEDIA_URL = '/media/'
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: '/home/media/media.lawrence.com/media/'
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, MEDIA_URL.strip('/'))
+MEDIA_ROOT = os.path.join(PROJECT_DATA_ROOT, MEDIA_URL.strip('/'))
+make_path(MEDIA_ROOT)
 
 # Annotations
 ANNOTATIONS_URL = 'uploads/annotations/'
-ANNOTATIONS_ROOT = os.path.join(PROJECT_ROOT, MEDIA_URL.strip('/'),
+ANNOTATIONS_ROOT = os.path.join(PROJECT_DATA_ROOT, MEDIA_URL.strip('/'),
                                 ANNOTATIONS_URL.strip('/'))
-
 make_path(ANNOTATIONS_ROOT)
 
 # Images uploads
 UPLOAD_IMAGES_URL = 'uploads/images/'
-UPLOAD_IMAGES_ROOT = os.path.join(PROJECT_ROOT, MEDIA_URL.strip('/'),
+UPLOAD_IMAGES_ROOT = os.path.join(PROJECT_DATA_ROOT, MEDIA_URL.strip('/'),
                                   UPLOAD_IMAGES_URL.strip('/'))
 
 make_path(UPLOAD_IMAGES_ROOT)
 
 # Image cache
 IMAGE_CACHE_URL = 'uploads/images/tmp/'
-IMAGE_CACHE_ROOT = os.path.join(PROJECT_ROOT, MEDIA_URL.strip('/'),
+IMAGE_CACHE_ROOT = os.path.join(PROJECT_DATA_ROOT, MEDIA_URL.strip('/'),
                                 IMAGE_CACHE_URL.strip('/'))
 
 make_path(IMAGE_CACHE_ROOT)
@@ -169,7 +173,7 @@ STATICFILES_DIRS = (
     os.path.join(CUSTOM_STATIC_PATH).replace('\\', '/'),
 )
 
-make_path(os.path.join(PROJECT_ROOT, 'customisations'))
+make_path(os.path.join(PROJECT_DATA_ROOT, 'customisations'))
 make_path(CUSTOM_STATIC_PATH)
 
 # List of finder classes that know how to find static files in
@@ -390,7 +394,7 @@ IMAGE_URLS_RELATIVE = False
 IMAGE_SERVER_URL = 'http://%s%s' % (IMAGE_SERVER_HOST, IMAGE_SERVER_PATH)
 # The absolute filesystem path of the images served by the image server (e.g. /home/myimages)
 # It should match iipserver FILESYSTEM_PREFIX parameter
-IMAGE_SERVER_ROOT = '/vol/digipal2/images'
+IMAGE_SERVER_ROOT = os.environ.get('IMAGE_SERVER_ROOT') or '/vol/digipal2/images'
 # python manage.py dpim will look under IMAGE_SERVER_ROOT +
 # IMAGE_SERVER_UPLOAD_ROOT for new images to upload
 IMAGE_SERVER_UPLOAD_ROOT = 'jp2'
@@ -413,7 +417,8 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 # Search page
 # The slug of the CMS Page that contains the help about the search interface
 SEARCH_HELP_PAGE_SLUG = 'how-to-use-digipal'
-SEARCH_INDEX_PATH = os.path.join(PROJECT_ROOT, 'search')
+SEARCH_INDEX_PATH = os.path.join(PROJECT_DATA_ROOT, 'search')
+make_path(SEARCH_INDEX_PATH)
 
 # Set this to True to let the quick search box go to the faceted search page
 # If False, goes to the advanced search page
@@ -473,7 +478,7 @@ DJANGO_LOG_SQL = False
 # USE False ON PRODUCTION SITE
 DEBUG_PERFORMANCE = False
 
-PROJECT_LOG_PATH = os.path.join(PROJECT_ROOT, 'logs')
+PROJECT_LOG_PATH = os.environ.get('LOG_ROOT') or os.path.join(PROJECT_ROOT, 'logs')
 make_path(PROJECT_LOG_PATH)
 
 LOGGING = {
@@ -545,7 +550,7 @@ warn_logger.addFilter(filter_django_warnings())
 #     BACKUPS    #
 ##################
 
-DB_BACKUP_PATH = os.path.join(PROJECT_ROOT, 'backups')
+DB_BACKUP_PATH = os.path.join(PROJECT_DATA_ROOT, 'backups')
 make_path(DB_BACKUP_PATH)
 
 # Front-end message for images which are inheriting unspecified media
@@ -586,7 +591,7 @@ INSTALLED_APPS = INSTALLED_APPS + ('compressor',)
 STATICFILES_FINDERS = STATICFILES_FINDERS + \
     ('compressor.finders.CompressorFinder',)
 
-DJANGO_CACHE_PATH = os.path.join(PROJECT_ROOT, 'django_cache')
+DJANGO_CACHE_PATH = os.path.join(PROJECT_DATA_ROOT, 'django_cache')
 make_path(DJANGO_CACHE_PATH)
 
 

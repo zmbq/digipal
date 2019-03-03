@@ -29,8 +29,7 @@ class ProjectZipper(object):
         print 'manage.py: ' + manage_path
         os.chdir(os.path.dirname(manage_path))
 
-        settings_module = run_cmd(
-            'grep "DJANGO_SETTINGS_MODULE" ' + manage_path)
+        settings_module = run_cmd('grep "DJANGO_SETTINGS_MODULE" manage.py')
         eval(re.sub(r'(?musi)^\s+', '', settings_module))
         settings_module = os.environ['DJANGO_SETTINGS_MODULE']
 

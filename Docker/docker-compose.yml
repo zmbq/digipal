@@ -29,9 +29,13 @@ services:
       - "8090"
     depends_on:
       - "archetype-db"
+    environment:
+      - DATA_ROOT=/django
+      - IMAGE_SERVER_ROOT=/images
+      - LOG_ROOT=/logs
     volumes:
       - archetype-django:/django
-      - archetype-images:/image
+      - archetype-images:/images
       - archetype-logs:/logs
 
   archetype-webserver:
