@@ -8,8 +8,6 @@ services:
     build: ./db
     expose:
       - "5432"
-    ports:
-      - "15432:5432"
     volumes:
       - archetype-db-volume:/var/lib/postgresql/data
 
@@ -24,7 +22,9 @@ services:
 
   archetype-backend:
     image: kingsdigitallab/archetype-backend
-    build: ./backend-server
+    build:
+      dockerfile: ./Docker/backend-server/Dockerfile
+      context: ../
     expose:
       - "8090"
     depends_on:
