@@ -4,7 +4,7 @@ FROM python:2.7-alpine
 RUN apk update && apk add \
     git \
     nodejs npm \
-    postgresql-dev \
+    postgresql-dev postgresql-client \
     gcc  \
     musl-dev \
     libxml2-dev \
