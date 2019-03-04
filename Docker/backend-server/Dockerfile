@@ -8,7 +8,8 @@ RUN apk update && apk add \
     gcc  \
     musl-dev \
     libxml2-dev \
-    libxslt-dev
+    libxslt-dev \
+    imagemagick
 
 # Clone just the build directory
 RUN mkdir /digipal
