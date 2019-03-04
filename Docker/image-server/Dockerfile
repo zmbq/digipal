@@ -30,7 +30,7 @@ ENV VERBOSITY 1
 ENV MAX_IMAGE_CACHE_SIZE 20
 ENV JPEG_QUALITY 75
 ENV MAX_CVT 800
-ENV FILESYSTEM_PREVIX /image
+ENV FILESYSTEM_PREFIX /images/
 ENV LOGFILE /logs/iipsrv.log
 
-CMD ["/iipsrv/src/iipsrv.fcgi", "--bind", "127.0.0.1:9000", "--backlog", "1024"]
+CMD ["/iipsrv/src/iipsrv.fcgi", "--bind", "0.0.0.0:9000", "--backlog", "1024"]

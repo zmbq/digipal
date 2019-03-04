@@ -392,6 +392,7 @@ IMAGE_URLS_RELATIVE = False
 # The URL of the IIP image server (e.g.
 # http://www.mydomain.com/iip/iipsrv.fcgi)
 IMAGE_SERVER_URL = 'http://%s%s' % (IMAGE_SERVER_HOST, IMAGE_SERVER_PATH)
+
 # The absolute filesystem path of the images served by the image server (e.g. /home/myimages)
 # It should match iipserver FILESYSTEM_PREFIX parameter
 IMAGE_SERVER_ROOT = os.environ.get('IMAGE_SERVER_ROOT') or '/vol/digipal2/images'

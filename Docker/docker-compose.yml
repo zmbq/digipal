@@ -17,7 +17,7 @@ services:
     expose:
       - "9000"
     volumes:
-      - archetype-images:/image
+      - archetype-images:/images
       - archetype-logs:/logs
 
   archetype-backend:

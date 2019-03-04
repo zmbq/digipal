@@ -8,6 +8,7 @@ from mezzanine.conf import settings
 
 # patch the iipimage to correct a bug (.image was hardcoded)
 from iipimage.storage import *
+from iipimage.fields import *
 
 # Patch 3+1:
 # We now support TIF as well as JP2 on the image server
@@ -110,3 +111,28 @@ def _call_image_conversion(command, input_path):
 
 
 image_storage._call_image_conversion = _call_image_conversion
+
+# PATCH 4
+# The image_storage accesses the image server to get the image dimensions. It uses settings.IMAGE_SERVER_URL by default.
+# This is OK when the image server is on a different server entirely, or in the old Docker deployment, where everything
+# is on the same server. It does not work in the new Docker deployment, where the image server is located in anotheer
+# container.
+# We need an internal URL for this, but only for getting the image dimensions.
+# So, we change the storage URL just before calling _get_image_dimensions, and restore it afterwards. We know this
+# works because Django is single threaded, and there's no async IO here, at all. So we don't expect a nasty race condition
+
+
+def wrap_get_image_dimensions(old_function):
+    def _wrapped(self):
+        try:
+            image_storage.base_url = settings.IMAGE_SERVER_INTERNAL_URL
+            return old_function(self)
+        finally:
+            image_storage.base_url = settings.IMAGE_SERVER_URL
+
+    return _wrapped
+
+
+if hasattr(settings, 'IMAGE_SERVER_INTERNAL_URL'):
+    ImageFieldFile._get_image_dimensions = wrap_get_image_dimensions(ImageFieldFile._get_image_dimensions)
+

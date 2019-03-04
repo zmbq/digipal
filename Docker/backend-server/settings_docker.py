@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 
 IMAGE_SERVER_HOST = 'localhost:6080'   # Must be the same as the ports entry in docker-compose.yml
 IMAGE_SERVER_ROOT = os.environ['IMAGE_SERVER_ROOT']
+IMAGE_SERVER_EXT = 'tif'
 
 # Ignore the errors Pycharm reports here, everything is imported from settings.py, which Pycharm does not see
 
@@ -41,6 +42,7 @@ make_path(os.path.join(IMAGE_SERVER_ROOT, IMAGE_SERVER_ORIGINALS_ROOT))
 IMAGE_SERVER_ZOOMIFY = 'http://%s%s?zoomify=%s/'
 IMAGE_SERVER_PATH = '/iip/iipsrv.fcgi'
 IMAGE_SERVER_URL = 'http://%s%s' % (IMAGE_SERVER_HOST, IMAGE_SERVER_PATH)
+IMAGE_SERVER_INTERNAL_URL = 'http://archetype-webserver/%s' % IMAGE_SERVER_PATH  # Used to access the image server from Django
 
 # Forwarded host (for proper nginx handling of redirects)
 USE_X_FORWARDED_HOST = True

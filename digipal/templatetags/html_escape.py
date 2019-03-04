@@ -243,7 +243,8 @@ def iip_img_a(image, *args, **kwargs):
         are treated.
     '''
 
-    return mark_safe(ur'<a href="%s&amp;RST=*&amp;QLT=100&amp;CVT=JPEG">%s</a>' % (escape(image.full().replace('\\', '/')), iip_img(image, *args, **kwargs)))
+    prefix = ur'<!-- image for %s -->' % image.full()
+    return mark_safe(prefix + ur'<a href="%s&amp;RST=*&amp;QLT=100&amp;CVT=JPEG">%s</a>' % (escape(image.full().replace('\\', '/')), iip_img(image, *args, **kwargs)))
 
 
 @register.simple_tag
