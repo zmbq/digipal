@@ -15,7 +15,7 @@ digipal_cust/django_cache/
 env/
 .idea/
 .vscode/
-node-utils/node_modules
+personal/node-utils/node_modules
 
 digipal_project/sqlite3.db
 digipal_project/precompiled-static/
