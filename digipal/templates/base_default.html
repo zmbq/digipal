@@ -230,5 +230,11 @@
         {% endcompress %}
 
         {% block extra_js %}{% endblock %}
+        
+        {% block kdl_maintained %}
+          {% if settings.KDL_MAINTAINED and not DEBUG %}
+              <script defer="defer" src="https://rawgit.com/kingsdigitallab/sla-acpp/develop/js/sla.js" type="text/javascript"></script>
+          {% endif %}
+        {% endblock %}
     </body>
 </html>
