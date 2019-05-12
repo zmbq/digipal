@@ -25,10 +25,10 @@ DEBUG = True
 COMPRESS_ENABLED = False
 
 COMPRESS_PRECOMPILERS = (
-    ('text/less', 'standalone.compressor_filters.PrecompiledLessFilter'),
-    ('text/typescript', 'standalone.compressor_filters.PrecompiledTypescriptFilter'),
+    ('text/less', 'personal.compressor_filters.PrecompiledLessFilter'),
+    ('text/typescript', 'personal.compressor_filters.PrecompiledTypescriptFilter'),
 )
 
 PRECOMPILED_STATIC_ROOT = os.path.join(BASE_DIR, 'precompiled-static')
-CUSTOM_APPS = ['standalone']
+CUSTOM_APPS = ['personal']
 
