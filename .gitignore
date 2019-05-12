@@ -17,3 +17,6 @@ env/
 .idea/
 precompiled-static/
 .vscode/
+node-utils/node_modules
+digipal_project/django_cache
+digipal_text/static/digipal_text/viewer/annotation.js
