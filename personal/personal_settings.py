@@ -29,6 +29,6 @@ COMPRESS_PRECOMPILERS = (
     ('text/typescript', 'personal.compressor_filters.PrecompiledTypescriptFilter'),
 )
 
-PRECOMPILED_STATIC_ROOT = os.path.join(BASE_DIR, 'precompiled-static')
+PRECOMPILED_STATIC_ROOT = os.path.join(PROJECT_DIR, 'precompiled-static')
 CUSTOM_APPS = ['personal']
 

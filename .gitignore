@@ -11,12 +11,16 @@ digipal/backups/*.sql
 digipal/repo_cfg.py
 digipal_cust/static/
 digipal_cust/django_cache/
-digipal_project/sqlite3.db
 
 env/
 .idea/
-precompiled-static/
 .vscode/
 node-utils/node_modules
+
+digipal_project/sqlite3.db
+digipal_project/precompiled-static/
 digipal_project/django_cache
+digipal_project/search
+digipal_project/static
+
 digipal_text/static/digipal_text/viewer/annotation.js
