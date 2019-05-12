@@ -204,7 +204,7 @@ class Modify extends ol.interaction.Pointer implements InteractionMode {
     //nearestVertexCoordinates_: ;
 
     constructor(options?: olx.interaction.ModifyOptions, vectorLayer?: ol.layer.Vector, map?: ol.Map) {
-        super(options);
+        super(options as any);
         this.features_ = options.features;
         this.pixelTolerance_ = options.pixelTolerance !== undefined ? options.pixelTolerance : 15;
 

@@ -23,7 +23,7 @@ class Command(BaseCommand):
         parser.add_argument('--clear-output', action='store_true', default=False,
                             help='Clear output directory before proceeding')
         parser.add_argument('--project-dir', type=str, default=self.get_project_dir(), help='Project source dir')
-        parser.add_argument('--node-bin-dir', type=str, default=os.path.join('personal', 'node_utils', 'node_modules', '.bin'),
+        parser.add_argument('--node-bin-dir', type=str, default=os.path.join('personal', 'node-utils', 'node_modules', '.bin'),
                             help='Directory with Node binaries')
 
     def handle(self, output_dir, no_less, no_typescript, clear_output, project_dir, node_bin_dir, *args, **options):
