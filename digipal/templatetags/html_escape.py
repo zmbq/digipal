@@ -2,6 +2,8 @@ from django.template.defaultfilters import stringfilter
 from django.utils.html import conditional_escape, escape
 from django.utils.safestring import mark_safe
 from django import template
+from mezzanine.conf import settings
+
 from digipal import utils as dputils
 import re
 from inspect import getargspec
@@ -243,7 +245,12 @@ def iip_img_a(image, *args, **kwargs):
         are treated.
     '''
 
-    return mark_safe(ur'<a href="%s&amp;RST=*&amp;QLT=100&amp;CVT=JPEG">%s</a>' % (escape(image.full().replace('\\', '/')), iip_img(image, *args, **kwargs)))
+    if settings.PERSONAL_EDITION:
+        inner = iip_img(image, *args, **kwargs)
+        return mark_safe(ur'<a href="/personal/image/%d">%s</a>' % (image.id, inner))
+        # We do not have an IIP Server at our disposal,
+    else:
+        return mark_safe(ur'<a href="%s&amp;RST=*&amp;QLT=100&amp;CVT=JPEG">%s</a>' % (escape(image.full().replace('\\', '/')), iip_img(image, *args, **kwargs)))
 
 
 @register.simple_tag

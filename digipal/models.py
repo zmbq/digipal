@@ -6,6 +6,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.utils.safestring import mark_safe
 from django.db.models import Q
+from personal.image_utils import get_image_thumbnail_url
 from PIL import Image as pil
 import os
 import re
@@ -26,6 +27,7 @@ from collections import OrderedDict
 
 from patches import admin_patches, whoosh_patches
 # need to call it here because get_image_path() is called in the model
+from personal.image_utils import get_iipimage_dimensions
 
 
 def has_edit_permission(request, model):
@@ -2175,7 +2177,7 @@ class Image(models.Model):
         if ret == (0, 0):
             if self.iipimage:
                 # obtain the new dims from the image server
-                ret = self.iipimage._get_image_dimensions()
+                ret = self.get_img_size() # self.iipimage._get_image_dimensions()
 
         if ret != (self.width, self.height):
             (self.width, self.height) = ret
@@ -2212,6 +2214,10 @@ class Image(models.Model):
         """
         path = ''
         if self.iipimage:
+            if settings.PERSONAL_EDITION:
+                # We have no IIP Server, use our own internal image URL /personal/image/<id>
+                path = '/personal/image/%d' % self.id
+        else:
             #path = self.iipimage.full_base_url
             path = settings.IMAGE_SERVER_FULL % \
                 (settings.IMAGE_SERVER_HOST, settings.IMAGE_SERVER_PATH,
@@ -2256,7 +2262,7 @@ class Image(models.Model):
         if width is None and height is None:
             height = settings.IMAGE_SERVER_THUMBNAIL_HEIGHT
         if self.iipimage:
-            ret = self.iipimage.thumbnail_url(height, width)
+            ret = get_image_thumbnail_url(self, height, width)
 
         if 1 and ret and not uncropped:
             region = self.get_page_boundaries()
@@ -2308,11 +2314,20 @@ class Image(models.Model):
         '''
         # TODO: fall back for non-postgresql RDBMS
         # TODO: optimise this by caching the result in a field
+
+        # SQLite does not know how to
         sort_fields = ['fn', 'folio_side']
         if not ignore_item_part:
             sort_fields.insert(0, 'item_part__display_label')
-        return query_set.extra(select={
-                               'fn': ur'''CASE WHEN digipal_image.folio_number~E'^\\d+$' THEN digipal_image.folio_number::integer ELSE 0 END'''}, ).order_by(*sort_fields)
+
+        if not settings.PERSONAL_EDITION:
+            fn = ur'''CASE WHEN digipal_image.folio_number~E'^\\d+$' THEN digipal_image.folio_number::integer ELSE 0 END'''
+        else:
+            # SQLite does not recognize the Postgres specific syntax above. This is an equivalent query
+            fn = ur'''CASE WHEN abs(digipal_image.folio_number) <> 0.0 OR digipal_image.folio_number = '0' 
+                      THEN CAST(digipal_image.folio_number AS INT) 
+                      ELSE 0 END'''
+        return query_set.extra(select={'fn': fn}, ).order_by(*sort_fields)
 
     def get_duplicates(self):
         '''Returns a list of Images with the same locus and shelfmark.'''
@@ -2324,7 +2339,8 @@ class Image(models.Model):
             WARNING: this function is SLOW because it makes a HTTP request to the image server.
             Only call if absolutely necessary.
         '''
-        return self.iipimage._get_image_dimensions()
+        return get_iipimage_dimensions(self.iipimage)
+        # return self.iipimage._get_image_dimensions()
 
     @classmethod
     def get_duplicates_from_ids(cls, ids=None):

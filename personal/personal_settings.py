@@ -32,3 +32,5 @@ COMPRESS_PRECOMPILERS = (
 PRECOMPILED_STATIC_ROOT = os.path.join(PROJECT_DIR, 'precompiled-static')
 CUSTOM_APPS = ['personal']
 
+IMAGE_SERVER_EXT = 'tif'
+PERSONAL_EDITION = True
