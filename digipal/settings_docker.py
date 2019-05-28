@@ -22,7 +22,16 @@ ALLOWED_HOSTS = ['*']
 
 # Remove this line to work with JP2 format
 # Note that it requires a kakadu license for commercial applications
-IMAGE_SERVER_EXT = 'tif'
+
+# The following is because local_settings is imported before  this file. We need to change
+# the import order, so local_settings is imported afterwards.
+try:
+    _ext = 'tif'
+    if PERSONAL_EDITION:
+        _ext = IMAGE_SERVER_EXT
+except NameError:
+    pass
+IMAGE_SERVER_EXT = _ext
 
 IMAGE_SERVER_HOST = 'localhost'
 IMAGE_SERVER_ROOT = os.path.join(PROJECT_ROOT, 'images')

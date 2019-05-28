@@ -16,6 +16,6 @@ def fetch_image(request, image_id):
     except:
         height = None
 
-    response = respond_with_image(image.iipimage, width, height)
+    response = respond_with_image(request, image.iipimage, width, height)
     return response
 

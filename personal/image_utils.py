@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from mezzanine.conf import settings
 
 from personal.storage import get_current_image_storage
+from sendfile import sendfile
 
 _image_storage = get_current_image_storage()
 
@@ -33,8 +34,9 @@ def get_image_thumbnail_url(image, height, width):
         return image.iipimage.thumbnail_url(height, width)
 
 
-def respond_with_image(iipimage, width=None, height=None):
-    img = Image.open(_image_storage.path(iipimage.name))
+def respond_with_image(request, iipimage, width=None, height=None):
+    img_path = _image_storage.path(iipimage.name)
+    img = Image.open(img_path)
     size = img.size
     if width is None and height is None:
         width, height = size[0], size[1]
@@ -47,7 +49,8 @@ def respond_with_image(iipimage, width=None, height=None):
 
     if width != size[0] or height != size[1]:
         img = img.resize((width, height))
+        response = HttpResponse(content_type='image/png')
+        img.save(response, 'PNG')
+        return response
 
-    response = HttpResponse(content_type='image/png')
-    img.save(response, 'PNG')
-    return response
+    return sendfile(request, img_path)

@@ -12,20 +12,20 @@ class PersonalImageStorage(ImageStorage):
 
     def _convert_image(self, name):
         """ Converts the image file at `name` to TIF """
-        if settings.IMAGE_SERVER_EXT != 'tif':
-            raise ValueError("Only conversion to tif is supported in the Personal Edition")
+        if settings.IMAGE_SERVER_EXT != 'png':
+            raise ValueError("Only conversion to png is supported in the Personal Edition")
 
         full_path = self.path(name)
         dir_name, file_name = os.path.split(full_path)
         file_root, file_ext = os.path.splitext(file_name)
-        tif_name = os.path.join(dir_name, '%s.tif' % file_root)
+        png_name = os.path.join(dir_name, '%s.png' % file_root)
 
         from PIL import Image
         orig_image = Image.open(full_path)
         # Save image in TIF formate
-        orig_image.save(tif_name)
+        orig_image.save(png_name)
 
-        if tif_name != full_path:
+        if png_name != full_path:
             os.remove(full_path)
 
 

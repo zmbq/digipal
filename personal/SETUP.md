@@ -20,6 +20,8 @@ Now you can set up the database. Switch to the project's root directory and run:
 
 Your local SQLite database is now ready
 
+The admin username is `admin`. The password is also `admin`.
+
 ## Set up the Frontend
 
 Archaetype: Server Edition uses `tsc` and `lessc` on the fly to handle SCSS And Typescript files. This means NodeJS needs to be installed for the system to run.
