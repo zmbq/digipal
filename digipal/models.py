@@ -28,6 +28,7 @@ from collections import OrderedDict
 from patches import admin_patches, whoosh_patches
 # need to call it here because get_image_path() is called in the model
 from personal.image_utils import get_iipimage_dimensions
+from personal.storage import get_current_image_storage
 
 
 def has_edit_permission(request, model):
@@ -1837,7 +1838,7 @@ class Image(models.Model):
     image = models.ImageField(upload_to=settings.UPLOAD_IMAGES_URL, blank=True,
                               null=True)
     iipimage = iipfield.fields.ImageField(upload_to=iipfield.storage.get_image_path,
-                                          blank=True, null=True, storage=iipfield.storage.image_storage, max_length=200)
+                                          blank=True, null=True, storage=get_current_image_storage(), max_length=200)
 
     display_label = models.CharField(max_length=128)
     # optional the display label provided by the user
