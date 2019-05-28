@@ -26,9 +26,9 @@ DigipalAnnotator.prototype.constructor = DigipalAnnotator;
  *              URL of the image on an image server.
  */
 
-function DigipalAnnotator(mediaUrl, imageUrl, imageWidth, imageHeight, imageServerUrl, isAdmin) {
+function DigipalAnnotator(mediaUrl, imageUrl, imageWidth, imageHeight, imageServerUrl, isAdmin, ignoreZoomify) {
     if (imageServerUrl && imageServerUrl != 'None' && imageServerUrl.length) {
-        Annotator.call(this, imageServerUrl, imageWidth, imageHeight, true);
+        Annotator.call(this, imageServerUrl, imageWidth, imageHeight, !ignoreZoomify);
     } else {
         Annotator.call(this, imageUrl, imageWidth, imageHeight, false);
     }

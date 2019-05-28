@@ -308,6 +308,7 @@ def image(request, image_id):
         'images': images,
         'image': image, 'height': height, 'width': width,
         'image_server_url': image_server_url, 'hands_list': hands_list,
+        'is_personal': settings.PERSONAL_EDITION,
         'image_link': image_link, 'annotations': annotations.count(),
         'annotations_list': data_allographs, 'url': url,
         'hands': hands, 'is_admin': is_admin,

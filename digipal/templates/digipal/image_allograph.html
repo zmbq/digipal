@@ -41,7 +41,7 @@
           $(document).ready(function(){
             annotator = new DigipalAnnotator('{{ MEDIA_URL }}',
                         'x', {{ width }}, {{ height }},
-                        '{{ image_server_url }}', "{{can_edit}}");
+                        '{{ image_server_url }}', "{{can_edit}}", "{{ is_personal }}");
     
             annotator.hands_page = "{{hands_page}}";
     

@@ -184,7 +184,7 @@
 
                 annotator = new DigipalAnnotator('{{ MEDIA_URL }}',
                 'x', {{ width }}, {{ height }},
-                '{{ image_server_url }}', "{{is_admin}}");
+                '{{ image_server_url }}', "{{is_admin}}", "{{ is_personal }}");
 
                 {% if not is_admin %}
                     annotator.toolbarPanel.controls.splice(4, 4);

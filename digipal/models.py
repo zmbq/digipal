@@ -2198,6 +2198,9 @@ class Image(models.Model):
     def zoomify(self):
         """Returns the URL to view the image from the image server as zoomify
         tiles."""
+        if settings.PERSONAL_EDITION:
+            return self.full()
+
         zoomify = None
 
         if self.path():
