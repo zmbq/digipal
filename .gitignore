@@ -12,7 +12,11 @@ digipal/repo_cfg.py
 digipal_cust/static/
 digipal_cust/django_cache/
 
+dist/
+build/lib/
+
 env/
+test_env/
 .idea/
 .vscode/
 personal/node-utils/node_modules

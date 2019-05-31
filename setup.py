@@ -20,7 +20,7 @@ CLASSIFIERS = [
 ]
 
 SCRIPTS = [
-    'start-archetype-pesronal=personal.scripts:run_server',
+    'start-archetype-personal=personal.scripts:run_server',
     'print-archetype-directories=persons.scripts:print_directories'
 ]
 
@@ -43,7 +43,7 @@ REQUIREMENTS = [
 
 setup(
     author="Peter Stokes",
-    name='Archetype: Personal',
+    name='archetype-personal',
     version=digipal.__version__,
     description='Digital Resource and Database of Palaeography, Manuscript Studies and Diplomatic',
     long_description=open(os.path.join(
