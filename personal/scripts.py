@@ -1,8 +1,6 @@
 # Scripts that are run from the command line after installation as a package
 # They basically just delegate everything to management commands
-
 import os
-from __future__ import print_function
 
 def get_top_dir():
     return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # This file is always in /personal, ==

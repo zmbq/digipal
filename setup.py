@@ -21,7 +21,7 @@ CLASSIFIERS = [
 
 SCRIPTS = [
     'start-archetype-personal=personal.scripts:run_server',
-    'print-archetype-directories=persons.scripts:print_directories'
+    'print-archetype-directories=personal.scripts:print_directories'
 ]
 
 REQUIREMENTS = [
