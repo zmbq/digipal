@@ -69,7 +69,7 @@ class Command(BaseCommand):
 
     def create_static_files(self):
         self.stdout.write('Installing node dependencies')
-        curdir = os.curdir
+        curdir = os.path.abspath(os.curdir)
         try:
             os.chdir(os.path.join(settings.BASE_DIR, 'personal', 'node-utils'))
             os.system('npm install')

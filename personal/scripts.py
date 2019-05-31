@@ -7,7 +7,7 @@ def get_top_dir():
 
 
 def print_directories():
-    current_dir = os.path.abspath(os.curdir())
+    current_dir = os.path.abspath(os.curdir)
     try:
         os.chdir(get_top_dir())
         os.system('python manage.py print-directories')
@@ -15,7 +15,7 @@ def print_directories():
         os.chdir(current_dir)
 
 def run_server():
-    current_dir = os.path.abspath(os.curdir())
+    current_dir = os.path.abspath(os.curdir)
     try:
         os.chdir(get_top_dir())
         # TODO: Switch to gunicorn or a Windows comparable
