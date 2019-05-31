@@ -28,6 +28,7 @@ REQUIREMENTS = [
     'Django==1.8.18',
     'django-contrib-comments<1.9.0',  # Fix derived Mezzanine requirement
     'Mezzanine==4.2.3',
+    'grappelli-safe==0.4.6',  # Replace buggy template on Mezzanine
     'Pillow==6.0.0',
     'Digital-Lightbox@https://github.com/geoffroy-noel-ddh/Digital-Lightbox/archive/6775f5d6b329b4b903c20040b8b433fc905585d2.zip',
     'django-iipimage@https://github.com/geoffroy-noel-ddh/django-iipimage/archive/d927997207402abc5525add1c5c907819229c0bb.zip',
@@ -39,6 +40,8 @@ REQUIREMENTS = [
     'lxml==3.4.0',
     'Whoosh==2.7.3',
     'regex==2019.5.25',
+    'gunicorn==19.9.0',
+    'waitress==1.3.0',
 ]
 
 setup(
