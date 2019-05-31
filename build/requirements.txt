@@ -1,34 +1,43 @@
+#
+# Run the following command to install all the python packages
+# used by the DigiPal framework
+#
+# pip install -r requirements
+#
+
 beautifulsoup4==4.6.0
-bleach==2.0.0
-chardet==3.0.4
-Digital-Lightbox==0.1
-disqus-python==0.4.2
+git+https://github.com/geoffroy-noel-ddh/Digital-Lightbox
 Django==1.8.18
-django-appconf==1.0.2
-django-compressor==1.5
-django-contrib-comments==1.8.0
-django-iipimage==0.1.0
-django-pagination==1.0.7
-django-reversion==1.8.7
-django-sendfile==0.3.11
-django-tinymce==2.6.0
-feedparser==5.1.3
-filebrowser-safe==0.4.6
-future==0.17.1
-grappelli-safe==0.4.6
-html5lib==0.999999999
-importlib==1.0.3
-lxml==3.4.0
 Mezzanine==4.2.3
-oauthlib==0.7.1
+regex
+# if it fails, try 'sudo apt-get install python-dev', then run again
 Pillow==6.0.0
+Whoosh==2.7.3
+disqus-python==0.4.2
+django-appconf==1.0.2
+# django-compress==1.0.1
+django-compressor==1.5
+git+https://github.com/geoffroy-noel-ddh/django-iipimage.git
+git+https://github.com/geoffroy-noel-ddh/django-pagination
+django-reversion==1.8.7
+django-tinymce==2.6.0
+# derived requirements, only needed to force the version down
+django-contrib-comments<1.9.0
+feedparser==5.1.3
+importlib==1.0.3
+# if it fails, try 'sudo apt-get install libxml2-dev libxslt1-dev python-dev', then run again
+lxml==3.4.0
+# if it fails, try 'sudo apt-get install libpq-dev', then run again
 psycopg2==2.7.7
+django-sendfile==0.3.11
+# We force this version. To replace buggy template in the one installed
+# with Mezzanine 3.1.5
+grappelli-safe==0.4.6
+bleach==2.0.0
+filebrowser_safe==0.4.6
+oauthlib==0.7.1
 pytz==2015.7
-regex==2019.2.18
+six==1.10.0
 requests==2.11.1
 requests-oauthlib==0.6.0
-simplejson==3.16.0
-six==1.10.0
-tzlocal==1.5.1
-webencodings==0.5.1
-Whoosh==2.7.3
+html5lib==0.999999999

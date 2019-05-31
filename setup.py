@@ -2,12 +2,9 @@
 # PLEASE IGNORED THIS FILE
 # TODO: bring it up to date and test
 #
-from pip.req import parse_requirements
 from setuptools import setup, find_packages
 import os
 import digipal
-
-install_reqs = parse_requirements('build/requirements.txt')
 
 CLASSIFIERS = [
     'Development Status :: 4 - Beta',
@@ -22,9 +19,31 @@ CLASSIFIERS = [
     "Programming Language :: Python :: 2.7",
 ]
 
+SCRIPTS = [
+    'start-archetype-pesronal=personal.scripts:run_server',
+    'print-archetype-directories=persons.scripts:print_directories'
+]
+
+REQUIREMENTS = [
+    'Django==1.8.18',
+    'django-contrib-comments<1.9.0',  # Fix derived Mezzanine requirement
+    'Mezzanine==4.2.3',
+    'Pillow==6.0.0',
+    'Digital-Lightbox@https://github.com/geoffroy-noel-ddh/Digital-Lightbox/archive/6775f5d6b329b4b903c20040b8b433fc905585d2.zip',
+    'django-iipimage@https://github.com/geoffroy-noel-ddh/django-iipimage/archive/d927997207402abc5525add1c5c907819229c0bb.zip',
+    'django-pagination@https://github.com/geoffroy-noel-ddh/django-pagination/archive/bd35668b35168eaaec9fbc374b69044404bea298.zip',
+    'django-reversion==1.8.7',
+    'django-tinymce==2.6.0',
+    'django-compressor==1.5',
+    'django-sendfile==0.3.11',
+    'lxml==3.4.0',
+    'Whoosh==2.7.3',
+    'regex==2019.5.25',
+]
+
 setup(
     author="Peter Stokes",
-    name='Archetype',
+    name='Archetype: Personal',
     version=digipal.__version__,
     description='Digital Resource and Database of Palaeography, Manuscript Studies and Diplomatic',
     long_description=open(os.path.join(
@@ -33,10 +52,11 @@ setup(
     license='BSD License',
     platforms=['OS Independent'],
     classifiers=CLASSIFIERS,
-    install_requires=[str(ir.req) for ir in install_reqs],
+    install_requires=REQUIREMENTS,
     tests_require=[
     ],
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
+    entry_points={ 'console_scripts': SCRIPTS },
 )
