@@ -1,7 +1,6 @@
 include README.md
+include digipal_project/sqlite3.db
 recursive-include digipal/templates *
 recursive-include digipal_text/templates *
-
 recursive-include digipal_project/static *
-recursive-include digipal_project/sqlite3.db
 
