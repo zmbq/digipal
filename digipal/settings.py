@@ -16,7 +16,13 @@ def gettext(s): return s
 
 def make_path(path):
     if not os.path.exists(path):
-        os.makedirs(path)
+        try:
+            os.makedirs(path)
+        except Exception:
+            # It is possible two instances are fired up concurrently, and both try to create the folder.
+            # In this case, the second will fail. Here we swallow this failure (only if the folder already exists)
+            if not os.path.exists(path):
+                raise
 
 ########################
 # MAIN DJANGO SETTINGS #
