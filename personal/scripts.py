@@ -29,9 +29,9 @@ def run_server():
     # Use waitress-serve on Windows, and gunicorn on all other platforms
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "digipal_project.settings")
     if os.name == 'nt':
-        os.system('waitress-serve --listen=127.0.0.1:8000 --threads 8 personal.wsgi:application')
+        os.system('waitress-serve --listen=0.0.0.0:8000 --threads 8 personal.wsgi:application')
     else:
-        os.system('gunicorn --workers 4 --bind 127.0.0.1:8000 personal.wsgi')
+        os.system('gunicorn --workers 4 --bind 0.0.0.0:8000 personal.wsgi')
 
 if __name__ == '__main__':
     run_server()
