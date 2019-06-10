@@ -23,4 +23,9 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE',
 # file. This includes Django's development server, if the WSGI_APPLICATION
 # setting points here.
 from django.core.wsgi import get_wsgi_application
-application = get_wsgi_application()
+
+# We're using dj_static to serve static files through wsgi, since we don't have a real web server
+#(https://ultimatedjango.com/learn-django/lessons/serving-static-files/)
+from dj_static import Cling
+
+application = Cling(get_wsgi_application())

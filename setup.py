@@ -42,6 +42,7 @@ REQUIREMENTS = [
     'regex==2019.5.25',
     'gunicorn==19.9.0',
     'waitress==1.3.0',
+    'dj_static==0.0.6',
 ]
 
 setup(
