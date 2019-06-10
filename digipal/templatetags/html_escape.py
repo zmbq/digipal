@@ -766,18 +766,21 @@ class CaptureasNode(template.Node):
 def archetype_version_message(*args, **kwargs):
     from digipal import __version__ as current_version
 
-    latest_version = dputils.get_latest_docker_version()
-
     upgrade_message = ''
-    if [int(n) for n in re.findall('\d+', current_version)] < [int(n) for n in re.findall('\d+', latest_version)]:
-        upgrade_message = '''
-            <a target="_blank" href="https://hub.docker.com/r/gnoelddh/digipal/" style="background-color:green; color: white; font-weight: bold; font-size: 1.5em;">
-                Get the new Archetype (%s)
-            </a>
-        ''' % latest_version
+    edition = 'Personal Edition' if settings.PERSONAL_EDITION else 'Server Edition'
+
+    if not settings.PERSONAL_EDITION:
+        latest_version = dputils.get_latest_docker_version() # This doesn't work in Personal Edition
+
+        if [int(n) for n in re.findall('\d+', current_version)] < [int(n) for n in re.findall('\d+', latest_version)]:
+            upgrade_message = '''
+                <a target="_blank" href="https://hub.docker.com/r/gnoelddh/digipal/" style="background-color:green; color: white; font-weight: bold; font-size: 1.5em;">
+                    Get the new Archetype (%s)
+                </a>
+            ''' % latest_version
 
     ret = '''
-    <p>You are using Archetype %s
+    <p>You are using Archetype: %s %s
         %s
-    </p>''' % (current_version, upgrade_message)
+    </p>''' % (edition, current_version, upgrade_message)
     return ret
