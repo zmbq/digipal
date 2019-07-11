@@ -6,7 +6,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.utils.safestring import mark_safe
 from django.db.models import Q
-from personal.image_utils import get_image_thumbnail_url
+from personal.image_utils import get_image_thumbnail_url, get_image_region_url
 from PIL import Image as pil
 import os
 import re
@@ -3274,14 +3274,16 @@ class Annotation(models.Model):
         if settings.IMAGE_SERVER_VERSION >= 1.0:
             wid = ret['dims'][0] * factor
 
-        ret['url'] = settings.IMAGE_SERVER_RGN % \
-            (settings.IMAGE_SERVER_HOST, settings.IMAGE_SERVER_PATH, self.image.path(),
-             'WID=%d' % wid,
-             ps[0][0] / dims[0],
-             ps[0][1] / dims[1],
-             ret['dims'][0] / dims[0],
-             ret['dims'][1] / dims[1])
-
+        # ret['url'] = settings.IMAGE_SERVER_RGN % \
+        #     (settings.IMAGE_SERVER_HOST, settings.IMAGE_SERVER_PATH, self.image.path(),
+        #      'WID=%d' % wid,
+        #      ps[0][0] / dims[0],
+        #      ps[0][1] / dims[1],
+        #      ret['dims'][0] / dims[0],
+        #      ret['dims'][1] / dims[1])
+        ret['url'] = get_image_region_url(self, wid,
+                                          ps[0][0] / dims[0], ps[0][1] / dims[1],
+                                          ret['dims'][0] / dims[0], ret['dims'][1] / dims[1])
         ret['url'] = Image.get_relative_or_absolute_url(ret['url'])
 
         for d in [0, 1]:

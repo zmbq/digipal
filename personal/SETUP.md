@@ -43,6 +43,6 @@ Now change back to the project's root and precompile the static files:
  
  Now all you need to do is collect the static files:
  
-     pythong manage.py collectstatic
+     python manage.py collectstatic
      
    
